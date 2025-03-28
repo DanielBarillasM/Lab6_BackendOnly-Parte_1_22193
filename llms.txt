@@ -1,0 +1,88 @@
+# llms.txt - Guía de Uso de la API La Liga Tracker
+
+Esta API RESTful permite gestionar partidos de fútbol de La Liga mediante operaciones CRUD y actualizaciones específicas. Es consumida desde un frontend HTML estático.
+
+Base URL: http://localhost:8080/api
+
+==========================
+🧾 ENDPOINTS DISPONIBLES
+==========================
+
+GET /matches
+→ Retorna todos los partidos en la base de datos.
+
+GET /matches/:id
+→ Retorna un partido específico por su ID.
+
+POST /matches
+→ Crea un nuevo partido.
+  ➜ Requiere un JSON con los siguientes campos:
+     {
+       "homeTeam": "Equipo Local",
+       "awayTeam": "Equipo Visitante",
+       "matchDate": "YYYY-MM-DD"
+     }
+
+PUT /matches/:id
+→ Actualiza un partido existente por ID.
+  ➜ Requiere el mismo cuerpo JSON que POST.
+
+DELETE /matches/:id
+→ Elimina un partido de la base de datos.
+
+PATCH /matches/:id/goals
+→ Incrementa en 1 el número de goles del partido.
+
+PATCH /matches/:id/yellowcards
+→ Incrementa en 1 el número de tarjetas amarillas.
+
+PATCH /matches/:id/redcards
+→ Incrementa en 1 el número de tarjetas rojas.
+
+PATCH /matches/:id/extratime
+→ Establece el tiempo extra del partido.
+  ➜ Se puede enviar un JSON:
+     {
+       "extraTime": "7 minutos"
+     }
+  ➜ Si no se envía nada, se asigna por defecto: `"5 minutos"`.
+
+==========================
+🌐 CORS ACTIVADO
+==========================
+
+El backend incluye configuración CORS global, permitiendo solicitudes desde cualquier origen.
+Se aceptan métodos: GET, POST, PUT, DELETE, PATCH y OPTIONS.
+
+==========================
+🖥️ USO DESDE EL FRONTEND
+==========================
+
+El archivo `LaLigaTracker.html` permite interactuar con todos los endpoints mencionados.
+Este archivo se abre localmente desde el navegador y se comunica con el backend en `localhost:8080`.
+
+==========================
+🛠️ CONEXIÓN A BASE DE DATOS
+==========================
+
+La base de datos `liga_db` se gestiona mediante MySQL.
+El script `init.sql` define la estructura y carga datos iniciales.
+
+==========================
+🧪 PRUEBAS
+==========================
+
+Se puede testear la API con herramientas como:
+
+• Hoppscotch: https://hoppscotch.io (no se uso)
+• Postman: https://www.postman.com/ (ya se creó una colección):
+  https://danielbarillas.postman.co/workspace/Daniel-Barillas's-Workspace~9102d261-b50b-49a8-8c55-1271f1db1d04/collection/43570440-52531523-664e-4266-8969-33c5665dfd42?action=share&creator=43570440
+
+También se puede importar la colección desde `swagger.yaml`.
+
+==========================
+👨‍💻 AUTOR
+==========================
+
+• Nombre: Pablo Daniel Barillas Moreno  
+• Carné: 22193
